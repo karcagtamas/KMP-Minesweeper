@@ -1,8 +1,5 @@
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.composeMultiplatform)
-    alias(libs.plugins.composeCompiler)
-    alias(libs.plugins.composeHotReload)
 }
 
 kotlin {
@@ -21,6 +18,8 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(projects.data.settings)
+
+            implementation(libs.koin.core)
         }
     }
 }
