@@ -2,11 +2,17 @@ package eu.karcags.minesweeper.feature.menu
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.max
+import eu.karcags.eu.minesweeper.ui.core.LocalDimensions
+import eu.karcags.eu.minesweeper.ui.core.LocalPadding
 
 @Composable
 internal fun MenuScreen(
@@ -20,22 +26,26 @@ internal fun MenuScreen(
         verticalArrangement = Arrangement.Center,
         modifier = modifier,
     ) {
-        TextButton(
+        val buttonModifier = Modifier
+            .padding(horizontal = LocalPadding.current.normal)
+            .widthIn(max = LocalDimensions.current.maxWidthSmall)
+            .fillMaxWidth()
+        MenuButton(
+            text = "Play",
             onClick = goToPlay,
-        ) {
-            Text("Play")
-        }
+            modifier = buttonModifier,
+        )
 
-        TextButton(
+        MenuButton(
+            text = "Highscores",
             onClick = goToHighscores,
-        ) {
-            Text("Highscores")
-        }
+            modifier = buttonModifier,
+        )
 
-        TextButton(
+        MenuButton(
+            text = "Settings",
             onClick = goToSettings,
-        ) {
-            Text("Settings")
-        }
+            modifier = buttonModifier,
+        )
     }
 }

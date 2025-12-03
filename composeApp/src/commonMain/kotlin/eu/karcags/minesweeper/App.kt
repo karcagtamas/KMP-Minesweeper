@@ -2,8 +2,14 @@ package eu.karcags.minesweeper
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import eu.karcags.eu.minesweeper.ui.core.Dimensions
+import eu.karcags.eu.minesweeper.ui.core.LocalDimensions
+import eu.karcags.eu.minesweeper.ui.core.LocalPadding
+import eu.karcags.eu.minesweeper.ui.core.Padding
 import eu.karcags.minesweeper.feature.highscores.Highscores
 import eu.karcags.minesweeper.feature.highscores.highscoresRoutes
 import eu.karcags.minesweeper.feature.menu.Menu
@@ -24,20 +30,30 @@ fun App(
     ) {
         MaterialTheme {
             val navController = rememberNavController()
-            NavHost(
-                navController = navController,
-                startDestination = Menu,
+            CompositionLocalProvider(
+                LocalPadding provides Padding(
+                    normal = 0.dp,
+                ),
+
+                LocalDimensions provides Dimensions(
+                    maxWidthSmall = 400.dp,
+                ),
             ) {
-                menuRoutes(
-                    goToPlay = {},
-                    goToHighscores = {
-                        navController.navigate(Highscores)
-                    },
-                    goToSettings = {},
-                )
-                highscoresRoutes()
-                //playRoutes()
-                //settingsRoutes()
+                NavHost(
+                    navController = navController,
+                    startDestination = Menu,
+                ) {
+                    menuRoutes(
+                        goToPlay = {},
+                        goToHighscores = {
+                            navController.navigate(Highscores)
+                        },
+                        goToSettings = {},
+                    )
+                    highscoresRoutes()
+                    //playRoutes()
+                    //settingsRoutes()
+                }
             }
         }
     }
