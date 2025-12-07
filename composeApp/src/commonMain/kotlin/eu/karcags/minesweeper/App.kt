@@ -14,6 +14,8 @@ import eu.karcags.minesweeper.feature.highscores.Highscores
 import eu.karcags.minesweeper.feature.highscores.highscoresRoutes
 import eu.karcags.minesweeper.feature.menu.Menu
 import eu.karcags.minesweeper.feature.menu.menuRoutes
+import eu.karcags.minesweeper.feature.settings.Settings
+import eu.karcags.minesweeper.feature.settings.settingsRoutes
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.KoinApplication
 import org.koin.core.module.Module
@@ -48,11 +50,12 @@ fun App(
                         goToHighscores = {
                             navController.navigate(Highscores)
                         },
-                        goToSettings = {},
+                        goToSettings = {
+                            navController.navigate(Settings)
+                        },
                     )
                     highscoresRoutes()
-                    //playRoutes()
-                    //settingsRoutes()
+                    settingsRoutes()
                 }
             }
         }
