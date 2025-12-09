@@ -1,3 +1,6 @@
+@file:OptIn(ExperimentalComposeLibrary::class)
+
+import org.jetbrains.compose.ExperimentalComposeLibrary
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -41,6 +44,8 @@ kotlin {
             api(compose.components.resources)
             api(compose.components.uiToolingPreview)
             api(compose.materialIconsExtended)
+
+            api(compose.uiTest)
         }
 
         jvmMain.dependencies {

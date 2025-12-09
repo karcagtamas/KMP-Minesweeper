@@ -36,6 +36,8 @@ kotlin {
             implementation(libs.koin.core)
             implementation(libs.bundles.koin.compose)
             implementation(libs.kotlinx.serialization)
+
+            implementation(kotlin("test"))
         }
     }
 }
