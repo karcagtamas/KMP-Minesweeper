@@ -70,7 +70,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.output1 }}
+          upload_url: ${{ needs.create-release.outputs.output1 }}
           asset_path: composeApp/build/outputs/apk/release/composeApp-release.apk
           asset_name: minesweeper-${{ github.ref_name }}.apk
           asset_content_type: application/vnd.android.package-archive
@@ -106,8 +106,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.output1 }}
-          asset_path: composeApp/build/compose/binaries/main-release/msi/Minesweeper-${{ steps.get_version_name.outputs.version_name }}.msi
+          upload_url: ${{ needs.create-release.outputs.output1 }}
+          asset_path: composeApp/build/compose/binaries/main-release/msi/eu.karcags.minesweeper-${{ steps.get_version_name.outputs.version_name }}.msi
           asset_name: minesweeper-${{ github.ref_name }}.msi
           asset_content_type: application/octet-stream
 
@@ -142,7 +142,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.output1 }}
-          asset_path: composeApp/build/compose/binaries/main-release/dmg/Minesweeper-${{ steps.get_version_name.outputs.version_name }}.dmg
+          upload_url: ${{ needs.create-release.outputs.output1 }}
+          asset_path: composeApp/build/compose/binaries/main-release/dmg/eu.karcags.minesweeper-${{ steps.get_version_name.outputs.version_name }}.dmg
           asset_name: minesweeper-${{ github.ref_name }}.dmg
           asset_content_type: application/octet-stream
