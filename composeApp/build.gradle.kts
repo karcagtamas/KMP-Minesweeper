@@ -105,7 +105,22 @@ compose.desktop {
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "eu.karcags.minesweeper"
-            packageVersion = "1.0.0"
+            packageVersion = versionNameProperty
+            description = "Minesweeper by KarcagS"
+            copyright = "2025 KarcagS"
+            licenseFile.set(project.file("../LICENSE.txt"))
+
+            macOS {
+                dockName = "Minesweeper"
+                entitlementsFile.set(project.file("default.entitlements"))
+            }
+        }
+
+        buildTypes.release {
+            proguard {
+                obfuscate.set(true)
+                configurationFiles.from("proguard-rules.pro")
+            }
         }
     }
 }
