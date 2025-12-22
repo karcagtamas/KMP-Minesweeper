@@ -1,5 +1,7 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import java.io.FileInputStream
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -8,6 +10,17 @@ plugins {
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeHotReload)
 }
+
+val versionPropertiesInputsStream = FileInputStream("$rootDir/versions.properties")
+val versionProperties = Properties().apply {
+    load(versionPropertiesInputsStream)
+}
+val versionCodeProperty = versionProperties.getProperty("versionCode").toInt()
+val versionMajorProperty = versionProperties.getProperty("versionMajor").toInt()
+val versionMinorProperty = versionProperties.getProperty("versionMinor").toInt()
+val versionPatchProperty = versionProperties.getProperty("versionPatch").toInt()
+
+val versionNameProperty = "$versionMajorProperty.$versionMinorProperty.$versionPatchProperty"
 
 kotlin {
     androidTarget {
@@ -62,8 +75,8 @@ android {
         applicationId = "eu.karcags.minesweeper"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = versionCodeProperty
+        versionName = versionNameProperty
     }
     packaging {
         resources {
