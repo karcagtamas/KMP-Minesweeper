@@ -60,7 +60,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.output1 }}
+          upload_url: ${{ needs.create-release.outputs.output1 }}
           asset_path: composeApp/build/outputs/bundle/release/composeApp-release.aab
           asset_name: minesweeper-${{ github.ref_name }}.aab
           asset_content_type: application/x-authorware-bin
@@ -135,7 +135,9 @@ jobs:
       - name: Get Version Name
         id: get_version_name
         shell: bash
-        run: echo "version_name=$(./.github/scripts/get_version_name.sh versions.properties)" >> $GITHUB_OUTPUT
+        run: |
+          chmod +x ./.github/scripts/get_version_name.sh
+          echo "version_name=$(./.github/scripts/get_version_name.sh versions.properties)" >> $GITHUB_OUTPUT
 
       - name: Upload Release DMG asset
         uses: actions/upload-release-asset@v1
